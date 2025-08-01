@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header></header>
+    <h1>ARB Translator</h1>
+    <hr />
+    <div class="block">
+      <!-- <label for="compact">
+        <input
+          type="radio"
+          name="format"
+          id="compact"
+          value="compact"
+        />Kompakt</label
+      >
+      <br />
+      <label for="extended">
+        <input
+          type="radio"
+          name="format"
+          id="extended"
+          value="extended"
+        />Erweitert(1 Zeile mehr dazwischen)</label
+      >
+      <br />
+      <label for="bigger"
+        ><input type="radio" name="format" id="bigger" value="bigger" />Größere
+        Schrift</label
+      >
+      <br /> -->
+      <div class="flex">
+        <section class="description">
+          Wähle die Sprachen aus, in die übersetzt werden soll:
+        </section>
+      </div>
+      <div id="checkboxes">
+        <div class="dropdown-container" id="languageDropdown">
+          <div class="dropdown-button" id="languageSelector">
+            Sprachen auswählen
+          </div>
+          <div class="checkbox-popover">
+            <label
+              ><input type="checkbox" name="language" value="BG" />
+              Bulgarisch</label
+            >
+            <label
+              ><input type="checkbox" name="language" value="CS" />
+              Tschechisch</label
+            >
+            <label
+              ><input type="checkbox" name="language" value="DA" />
+              Dänisch</label
+            >
+            <label
+              ><input type="checkbox" name="language" value="DE" />
+              Deutsch</label
+            >
+            <label
+              ><input type="checkbox" name="language" value="EL" />
+              Griechisch</label
+            >
+            <label
+              ><input type="checkbox" name="language" value="EN-GB" /> Englisch
+              (UK)</label
+            >
+            <label
+              ><input type="checkbox" name="language" value="EN-US" /> Englisch
+              (US)</label
+            >
+            <label
+              ><input type="checkbox" name="language" value="ES" />
+              Spanisch</label
+            >
+            <label
+              ><input type="checkbox" name="language" value="ET" />
+              Estnisch</label
+            >
+            <label
+              ><input type="checkbox" name="language" value="FI" />
+              Finnisch</label
+            >
+            <label
+              ><input type="checkbox" name="language" value="FR" />
+              Französisch</label
+            >
+            <label
+              ><input type="checkbox" name="language" value="HU" />
+              Ungarisch</label
+            >
+            <label
+              ><input type="checkbox" name="language" value="ID" />
+              Indonesisch</label
+            >
+            <label
+              ><input type="checkbox" name="language" value="IT" />
+              Italienisch</label
+            >
+            <label
+              ><input type="checkbox" name="language" value="JA" />
+              Japanisch</label
+            >
+            <label
+              ><input type="checkbox" name="language" value="KO" />
+              Koreanisch</label
+            >
+            <label
+              ><input type="checkbox" name="language" value="LT" />
+              Litauisch</label
+            >
+            <label
+              ><input type="checkbox" name="language" value="LV" />
+              Lettisch</label
+            >
+            <label
+              ><input type="checkbox" name="language" value="NB" />
+              Norwegisch</label
+            >
+            <label
+              ><input type="checkbox" name="language" value="NL" />
+              Niederländisch</label
+            >
+            <label
+              ><input type="checkbox" name="language" value="PL" />
+              Polnisch</label
+            >
+            <label
+              ><input type="checkbox" name="language" value="PT-BR" />
+              Portugiesisch (BR)</label
+            >
+            <label
+              ><input type="checkbox" name="language" value="PT-PT" />
+              Portugiesisch (PT)</label
+            >
+            <label
+              ><input type="checkbox" name="language" value="RO" />
+              Rumänisch</label
+            >
+            <label
+              ><input type="checkbox" name="language" value="RU" />
+              Russisch</label
+            >
+            <label
+              ><input type="checkbox" name="language" value="SK" />
+              Slowakisch</label
+            >
+            <label
+              ><input type="checkbox" name="language" value="SL" />
+              Slowenisch</label
+            >
+            <label
+              ><input type="checkbox" name="language" value="SV" />
+              Schwedisch</label
+            >
+            <label
+              ><input type="checkbox" name="language" value="TR" />
+              Türkisch</label
+            >
+            <label
+              ><input type="checkbox" name="language" value="UK" />
+              Ukrainisch</label
+            >
+            <label
+              ><input type="checkbox" name="language" value="ZH" />
+              Chinesisch</label
+            >
+          </div>
+        </div>
+      </div>
+      <pre id="output"></pre>
+
+      <div id="upload">
+        <input type="file" id="fileInput" hidden />
+        <label for="fileInput" class="button">Datei auswählen</label>
+      </div>
+      <button type="submit" id="submit">Übersetzen</button>
+      <div class="button-flex"><div id="downloads"></div></div>
+      <div><pre id="outputTranslated"></pre></div>
+    </div>
+    <script type="module" src="script.js"></script>
+  </body>
+</html>

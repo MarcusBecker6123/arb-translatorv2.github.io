@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>ARb Test</title>
+  </head>
+  <body>
+    <input type="file" id="fileInput" />
+    <div id="downloads"></div>
+    <script type="module">
+      import { extractPlaceholders, restorePlaceholders } from "./utils.js";
+
+      // Mock deeplTranslate
+      async function deeplTranslate(texts, targetLang) {
+        // Einfacher Mock: hängt Sprache hinten dran
+        return texts.map((t) => `[${targetLang}] ${t}`);
+      }
+
+      document
+        .getElementById("fileInput")
+        .addEventListener("change", async () => {
+          const file = fileInput.files[0];
+          if (!file) return;
+
+          const text = await file.text();
+          let json;
+
+          try {
+            json = JSON.parse(text);
+          } catch (err) {
+            console.error("Fehler beim Parsen:", err);
+            return;
+          }
+
+          const selectedLanguages = ["et", "fi"]; // Simuliert Auswahl
+          const keys = Object.keys(json);
+          const translatables = keys
+            .filter((k) => typeof json[k] === "string")
+            .map((k) => ({
+              key: k,
+              ...extractPlaceholders(json[k]),
+            }));
+
+          const textsToTranslate = translatables.map((t) => t.newText);
+          const downloadArea = document.getElementById("downloads");
+          downloadArea.innerHTML = "";
+
+          for (const lang of selectedLanguages) {
+            const translated = await deeplTranslate(textsToTranslate, lang);
+            const final = {};
+
+            for (let i = 0; i < translatables.length; i++) {
+              final[translatables[i].key] = restorePlaceholders(
+                translated[i],
+                translatables[i].replacements
+              );
+            }
+
+            for (const k of keys) {
+              if (typeof json[k] !== "string") {
+                final[k] = json[k];
+              }
+            }
+
+            delete final["@@locale"];
+            const finalWithLocaleFirst = {
+              "@@locale": lang,
+              ...final,
+            };
+
+            const jsonString = JSON.stringify(
+              finalWithLocaleFirst,
+              (k, v) => v,
+              2
+            );
+
+            // Test-Ausgabe prüfen
+            console.assert(
+              jsonString.includes('"@@locale": "' + lang + '"'),
+              `@@locale fehlt in ${lang}`
+            );
+            console.assert(
+              jsonString.trim().startsWith(`{\n  "@@locale": "`),
+              `@@locale steht nicht am Anfang in ${lang}`
+            );
+
+            const blob = new Blob([jsonString], { type: "application/json" });
+            const url = URL.createObjectURL(blob);
+            const button = document.createElement("button");
+            button.textContent = `Download ${lang}`;
+            button.addEventListener("click", () => {
+              const a = document.createElement("a");
+              a.href = url;
+              a.download = `app_${lang}.arb`;
+              a.click();
+              URL.revokeObjectURL(url);
+            });
+
+            downloadArea.appendChild(button);
+          }
+        });
+    </script>
+  </body>
+</html>

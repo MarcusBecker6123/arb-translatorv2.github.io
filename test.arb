@@ -1,0 +1,6 @@
+{
+  "@@locale": "de",
+  "appTitle": "Meine App",
+  "greeting": "Hallo {name}!",
+  "@meta": { "info": "Testdaten" }
+}

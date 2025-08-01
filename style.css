@@ -1,0 +1,223 @@
+* {
+    background-color: #1e1e1e;
+  color: #f5f5f5;
+  font-family: monospace;
+}
+
+header {
+    background-color: #0a0a0a;
+    position: inherit;
+    margin: 0 auto;
+   
+}
+
+hr {
+    background: linear-gradient(to right, #1f1f1f, #646464, #1f1f1f);
+    height: 3px;
+    border:none;
+    margin-bottom:100px;
+}
+
+section {
+    padding-bottom: 20px;
+    
+}
+
+div  {
+    display:flex;
+    justify-content: center;
+    
+}
+
+body header, h1 {
+    display: flex;
+    justify-content: center;
+    font-size: 3rem;
+    letter-spacing: -2px;
+    text-transform:uppercase;
+    background: linear-gradient(to right, rgb(99, 162, 137), rgba(80,0,200,1), rgba(150, 100, 150, 1), rgba(120, 0, 190, 1), rgb(85, 173, 156));
+    background-size: 200%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: animate-gradient 2s alternate infinite;
+}
+
+.button {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    height: 40px;
+    width: 150px;
+    background-color: #1e1e1e;
+    color: #f5f5f5;
+    box-shadow: 3px 1px 4px 1px #d2d2d2ff;
+    margin: 15px 0;
+}
+
+@keyframes animate-gradient {
+    from{
+        background-position:350% ;
+    }
+    
+    to{background-position: 200%;}
+}
+
+input[type=file] {
+    margin-top: 60px;
+}
+
+
+input[type=checkbox]:checked {
+        box-shadow: 3px 1px 4px 1px #d2d2d2ff;
+}
+input[type=checkbox] {
+    position: absolute;
+    right:10px;
+    
+    
+}
+
+/* body {
+    height: 100vh;
+    position:absolute;
+    left: 50%;
+    translate: -50%;
+} */
+
+
+
+input {
+    margin-bottom: 20px;
+    margin-right: 10px;
+    line-height: 20px;
+    
+}
+
+h2 {
+    display:flex;
+    
+    font-size: 1.8rem;
+    line-height: 2.2rem;
+    font-weight: 200;
+    letter-spacing: 1.5px;
+}
+
+@media (max-width: 800px) {
+    h2 {
+        font-size: 1.2rem;
+        letter-spacing: 0px;
+        line-height:1rem;
+    }
+}
+
+.block {
+    display:block;
+}
+
+.flex {
+    display:flex;
+    justify-content: center;
+}
+
+.description {
+    display: block;
+    font-size: 1.2rem;
+    letter-spacing: -0.5px;
+}
+
+button {
+    min-width: 150px;
+    min-height: 30px;
+    display:block;
+    position: relative;
+    left:50%;
+    translate: -50%;
+    margin-top:15px;
+    box-shadow: 3px 1px 4px 1px #d2d2d2ff;
+    border: none;
+    border-radius:7px;
+}
+
+button:hover, .button:hover {
+    scale:1.05;
+}
+
+.dropdown-container {
+    position: relative;
+    display: inline-block;
+  }
+
+  .dropdown-button {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding: 10px;
+    margin: 20px 0;
+    border: 1px solid #ccc;
+    background: white;
+    cursor: pointer;
+    border-radius: 4px;
+    width: 300px;
+    height: 30px;
+    text-align: left;
+    color: #000000ff
+  }
+
+  #submit {
+    height:40px;
+    width:150px;
+    margin-bottom:20px;
+  }
+
+  .checkbox-popover {
+    display: none;
+    position: absolute;
+    top: 110%;
+    left: 0;
+    background: white;
+    border: 1px solid #ccc;
+    max-height: 250px;
+    overflow-y: auto;
+    border-radius: 4px;
+    padding: 10px;
+    z-index: 999;
+    width: 100%;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .dropdown-container.open .checkbox-popover {
+    display: block;
+    max-width:300px;
+  }
+
+  .checkbox-popover label {
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  label {
+    background:white;
+    color:#1e1e1e;
+    line-height:1.7rem;
+    letter-spacing: -0.3px;
+  }
+
+  #checkboxes, #upload {
+    display:flex;
+     justify-content: center;
+  }
+
+  .button-flex {
+    display:flex; 
+    justify-content: center;
+    
+  }
+
+  #downloads {
+  display: flex;
+  flex-direction: column;         /* Bei vielen Buttons umbrechen */
+  gap: 5px;               /* Abstand zwischen Buttons */
+  align-items: center; /* Zentriert die Buttons innerhalb */
+}
