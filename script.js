@@ -30,7 +30,7 @@ document.getElementById("fileInput").addEventListener("change", async () => {
 
     document.getElementById("submit").addEventListener("click", async () => {
         const downloadArea = document.getElementById("downloads");
-        downloadArea.innerHTML = ""; // Vorherige Buttons löschen
+        downloadArea.replaceChildren();
 
         for (const lang of selectedLanguages) {
             try {
