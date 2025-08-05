@@ -1,11 +1,12 @@
 import { extractPlaceholders, restorePlaceholders } from "./utils.js";
 
+let json, translatables, textsToTranslate, keys;
+
 document.getElementById("fileInput").addEventListener("change", async () => {
     const file = fileInput.files[0];
     if (!file) return;
 
     const text = await file.text();
-    let json;
 
     try {
         json = JSON.parse(text);
@@ -18,68 +19,77 @@ document.getElementById("fileInput").addEventListener("change", async () => {
         document.querySelectorAll('input[name="language"]:checked')
     ).map(cb => cb.value);
 
-    const keys = Object.keys(json);
-    const translatables = keys
+    keys = Object.keys(json);
+    translatables = keys
         .filter(k => typeof json[k] === "string")
         .map(k => ({
             key: k,
             ...extractPlaceholders(json[k])
         }));
 
-    const textsToTranslate = translatables.map(t => t.newText);
+    textsToTranslate = translatables.map(t => t.newText);
+});
 
-    document.getElementById("submit").addEventListener("click", async () => {
-        const downloadArea = document.getElementById("downloads");
-        downloadArea.replaceChildren();
+document.getElementById("submit").addEventListener("click", async () => {
+    const selectedLanguages = Array.from(
+        document.querySelectorAll('input[name="language"]:checked')
+    ).map(cb => cb.value);
 
-        for (const lang of selectedLanguages) {
-            try {
-                const translated = await deeplTranslate(textsToTranslate, lang);
-                const final = {};
+    if (!json || !translatables || !textsToTranslate || !keys) {
+        console.error("Keine Datei geladen oder ungültige Daten.");
+        return;
+    }
 
-                // Übersetzte Werte mit Platzhalter wieder einsetzen
-                for (let i = 0; i < translatables.length; i++) {
-                    final[translatables[i].key] = restorePlaceholders(translated[i], translatables[i].replacements);
-                }
+    const downloadArea = document.getElementById("downloads");
+    downloadArea.replaceChildren();
 
-                // Nicht-übersetzbare (z. B. @metadata) wieder hinzufügen
-                for (const k of keys) {
-                    if (typeof json[k] !== "string") {
-                        final[k] = json[k];
-                    }
-                }
+    for (const lang of selectedLanguages) {
+        try {
+            const translated = await deeplTranslate(textsToTranslate, lang);
+            const final = {};
 
-                // Ersetze @@locale am Anfang
-                const localeValue = lang.toLowerCase().split("-")[0];
-                delete final["@@locale"];
-                const finalWithLocaleFirst = {
-                    "@@locale": localeValue,
-                    ...final
-                };
-
-                function preservAllKeysReplacer(key, value) {
-                    return value;
-                }
-
-                // Download-Button erzeugen
-                const blob = new Blob([JSON.stringify(finalWithLocaleFirst, preservAllKeysReplacer, 2)], { type: "application/json" });
-                const url = URL.createObjectURL(blob);
-                const button = document.createElement("button");
-                button.textContent = `Download ${lang}`;
-                button.addEventListener("click", () => {
-                    const a = document.createElement("a");
-                    a.href = url;
-                    a.download = `app_${lang.toLowerCase()}.arb`;
-                    a.click();
-                    URL.revokeObjectURL(url);
-                });
-
-                downloadArea.appendChild(button);
-            } catch (err) {
-                console.error(`Übersetzung für ${lang} fehlgeschlagen:`, err);
+            // Übersetzte Werte mit Platzhalter wieder einsetzen
+            for (let i = 0; i < translatables.length; i++) {
+                final[translatables[i].key] = restorePlaceholders(translated[i], translatables[i].replacements);
             }
+
+            // Nicht-übersetzbare (z. B. @metadata) wieder hinzufügen
+            for (const k of keys) {
+                if (typeof json[k] !== "string") {
+                    final[k] = json[k];
+                }
+            }
+
+            // Ersetze @@locale am Anfang
+            const localeValue = lang.toLowerCase().split("-")[0];
+            delete final["@@locale"];
+            const finalWithLocaleFirst = {
+                "@@locale": localeValue,
+                ...final
+            };
+
+            function preservAllKeysReplacer(key, value) {
+                return value;
+            }
+
+            // Download-Button erzeugen
+            const blob = new Blob([JSON.stringify(finalWithLocaleFirst, preservAllKeysReplacer, 2)], { type: "application/json" });
+            const url = URL.createObjectURL(blob);
+            const button = document.createElement("button");
+            button.textContent = `Download ${lang}`;
+            button.addEventListener("click", () => {
+                const a = document.createElement("a");
+                a.href = url;
+                a.download = `app_${lang.toLowerCase()}.arb`;
+                a.click();
+                URL.revokeObjectURL(url);
+            });
+
+            downloadArea.appendChild(button);
+        } catch (err) {
+            console.error(`Übersetzung für ${lang} fehlgeschlagen:`, err);
         }
-    });
+    }
 });
 
 // Ruft dein Express-Backend auf, das die DeepL-Übersetzung übernimmt
