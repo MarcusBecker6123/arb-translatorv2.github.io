@@ -45,7 +45,7 @@ app.post('/translate', async (req, res) => {
     texts.forEach(t => params.append("text", t));
 
     try {
-        const response = await fetch("https://api-free.deepl.com/v2/translate", {
+        const response = await fetch("https://arb-translatorv2-github-io.onrender.com/translate", {
             method: "POST",
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
             body: params

@@ -84,7 +84,7 @@ document.getElementById("fileInput").addEventListener("change", async () => {
 
 // Ruft dein Express-Backend auf, das die DeepL-Übersetzung übernimmt
 async function deeplTranslate(texts, targetLang) {
-    const response = await fetch("https://arb-translatorv2-github-io.onrender.com", {
+    const response = await fetch("https://arb-translatorv2-github-io.onrender.com/translate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ texts, targetLang })
