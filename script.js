@@ -94,11 +94,16 @@ document.getElementById("submit").addEventListener("click", async () => {
 });
 
 // Ruft dein Express-Backend auf, das die DeepL-Übersetzung übernimmt
-async function deeplTranslate(texts, targetLang) {
+async function deeplTranslate(texts, targetLang, customKey = null) {
+    if (!customKey) {
+        texts = texts.slice(0, 10);
+    }
+    const apiKey = customKey || undefined;
+
     const response = await fetch("https://arb-translatorv2-github-io.onrender.com/translate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ texts, targetLang })
+        body: JSON.stringify({ texts, targetLang, apiKey })
     });
 
     if (!response.ok) {
