@@ -46,6 +46,7 @@ document.getElementById("submit").addEventListener("click", async () => {
     for (const lang of selectedLanguages) {
         try {
             const translated = await deeplTranslate(textsToTranslate, lang);
+            await new Promise(resolve => setTimeout(resolve, 500));
             const final = {};
 
             // Übersetzte Werte mit Platzhalter wieder einsetzen
