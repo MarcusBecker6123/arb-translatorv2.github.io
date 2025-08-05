@@ -37,15 +37,21 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.post('/translate', async (req, res) => {
-    const { texts, targetLang } = req.body;
+    let { texts, targetLang, apiKey } = req.body;
+
+    if (!apiKey) {
+        texts = texts.slice(0, 10);
+    }
+
+    const authKey = apiKey || DEEPL_API_KEY;
 
     const params = new URLSearchParams();
-    params.append("auth_key", DEEPL_API_KEY);
+    params.append("auth_key", authKey);
     params.append("target_lang", targetLang);
     texts.forEach(t => params.append("text", t));
 
     try {
-        const response = await fetch("https://arb-translatorv2-github-io.onrender.com/translate", {
+        const response = await fetch("https://api-free.deepl.com/v2/translate", {
             method: "POST",
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
             body: params
