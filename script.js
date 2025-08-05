@@ -28,11 +28,12 @@ document.getElementById("fileInput").addEventListener("change", async () => {
 
     const textsToTranslate = translatables.map(t => t.newText);
 
-    const downloadArea = document.getElementById("downloads");
-    downloadArea.innerHTML = ""; // Vorherige Buttons löschen
+    document.getElementById("submit").addEventListener("click", async () => {
+        const downloadArea = document.getElementById("downloads");
+        downloadArea.innerHTML = ""; // Vorherige Buttons löschen
 
-    for (const lang of selectedLanguages) {
-            document.getElementById("submit").addEventListener("click", async () =>{try {
+        for (const lang of selectedLanguages) {
+            try {
                 const translated = await deeplTranslate(textsToTranslate, lang);
                 const final = {};
 
@@ -52,12 +53,10 @@ document.getElementById("fileInput").addEventListener("change", async () => {
                 const localeValue = lang.toLowerCase().split("-")[0];
                 delete final["@@locale"];
                 const finalWithLocaleFirst = {
-                "@@locale": localeValue,
-                ...final
+                    "@@locale": localeValue,
+                    ...final
                 };
 
-                console.log(finalWithLocaleFirst);
-                
                 function preservAllKeysReplacer(key, value) {
                     return value;
                 }
@@ -78,8 +77,9 @@ document.getElementById("fileInput").addEventListener("change", async () => {
                 downloadArea.appendChild(button);
             } catch (err) {
                 console.error(`Übersetzung für ${lang} fehlgeschlagen:`, err);
-            }})
-    }
+            }
+        }
+    });
 });
 
 // Ruft dein Express-Backend auf, das die DeepL-Übersetzung übernimmt
