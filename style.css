@@ -209,10 +209,16 @@ button:hover, .button:hover {
      justify-content: center;
   }
 
-  .button-flex, .localization-instructions {
+  .button-flex {
     display:flex; 
     justify-content: center;
     
+  }
+
+  .localization-instructions {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
   #downloads {
