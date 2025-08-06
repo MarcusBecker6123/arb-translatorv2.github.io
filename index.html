@@ -181,6 +181,64 @@
       <button type="submit" id="submit">Übersetzen</button>
       <div class="button-flex"><div id="downloads"></div></div>
       <div><pre id="outputTranslated"></pre></div>
+      <div class="localization-instructions">
+  <h2>✅ Verwendung der übersetzten <code>.arb</code>-Dateien in Flutter</h2>
+
+  <h3>1. 📁 Lege deine <code>.arb</code>-Dateien ab</h3>
+  <p>Speichere deine <code>en.arb</code>, <code>de.arb</code> usw. im Ordner:</p>
+  <pre><code>lib/l10n/</code></pre>
+  <p><em>Falls der Ordner nicht existiert, einfach neu erstellen.</em></p>
+
+  <h3>2. ⚙️ Abhängigkeiten in <code>pubspec.yaml</code></h3>
+  <p>Füge folgende Einträge hinzu, falls noch nicht vorhanden:</p>
+  <pre><code>dependencies:
+  flutter_localizations:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_gen_runner: ^5.4.0
+  build_runner: ^2.4.8
+</code></pre>
+
+  <h3>3. 🔧 Lokalisierung aktivieren in <code>pubspec.yaml</code></h3>
+  <p>Ergänze im unteren Bereich:</p>
+  <pre><code>flutter:
+  generate: true
+  # andere Assets hier einfach stehen lassen</code></pre>
+
+  <h3>4. 💻 Führe den Codegenerator aus</h3>
+  <pre><code>flutter pub get
+flutter gen-l10n</code></pre>
+  <p><strong>Alternativ mit <code>build_runner</code>:</strong></p>
+  <pre><code>flutter pub run build_runner build</code></pre>
+
+  <h3>5. 🧩 Import in deiner Dart-Datei</h3>
+  <pre><code>import 'package:flutter_gen/gen_l10n/app_localizations.dart';</code></pre>
+
+  <h3>6. 🌐 Lokalisierung im <code>MaterialApp</code> aktivieren</h3>
+  <pre><code>return MaterialApp(
+  localizationsDelegates: const [
+    AppLocalizations.delegate,
+    GlobalMaterialLocalizations.delegate,
+    GlobalWidgetsLocalizations.delegate,
+    GlobalCupertinoLocalizations.delegate,
+  ],
+  supportedLocales: const [
+    Locale('en'),
+    Locale('de'),
+    // weitere Sprachen hinzufügen
+  ],
+  home: MyHomePage(),
+);</code></pre>
+
+  <h3>7. 🗣 Zugriff auf Texte in Widgets</h3>
+  <pre><code>Text(AppLocalizations.of(context)!.login)
+// oder mit Fallback:
+Text(AppLocalizations.of(context)?.login ?? 'Login')</code></pre>
+
+  <hr>
+  <p><strong>📝 Hinweis:</strong> <code>.arb</code>-Schlüssel wie „login“, „logout“, „greeting“ müssen in <em>allen</em> <code>.arb</code>-Dateien vorhanden sein, sonst kommt es zu Build-Fehlern.</p>
+</div>
     </div>
     <script type="module" src="script.js"></script>
   </body>
