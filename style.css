@@ -209,7 +209,7 @@ button:hover, .button:hover {
      justify-content: center;
   }
 
-  .button-flex, localization-instructions {
+  .button-flex, .localization-instructions {
     display:flex; 
     justify-content: center;
     
