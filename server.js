@@ -39,16 +39,28 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.post('/translate', async (req, res) => {
     let { texts, targetLang, apiKey } = req.body;
 
-    if (!apiKey) {
-        texts = texts.slice(0, 10);
+    // Eingabe prüfen
+    if (!Array.isArray(texts) || typeof targetLang !== 'string') {
+      return res.status(400).json({ error: "Ungültige Anfrage: 'texts' muss ein Array sein und 'targetLang' ein String." })
     }
 
-    const authKey = apiKey || DEEPL_API_KEY;
+    let limitedTexts;
+    let usedKey;
+
+    if (!apiKey) {
+      // Kein eigener key => Texte limitieren und Standardkey verwenden
+      limitedTexts = texts.slice(0, 10);
+      usedKey = DEEPL_API_KEY;
+    } else {
+      // Eigener Key => alles übersetzen
+      limitedTexts = texts;
+      usedKey = apiKey;
+    }
 
     const params = new URLSearchParams();
-    params.append("auth_key", authKey);
+    params.append("auth_key", usedKey);
     params.append("target_lang", targetLang);
-    texts.forEach(t => params.append("text", t));
+    limitedTexts.forEach(t => params.append("text", t));
 
     try {
         const response = await fetch("https://api-free.deepl.com/v2/translate", {
@@ -65,5 +77,9 @@ app.post('/translate', async (req, res) => {
 });
 
 app.listen(PORT, () => {
-    console.log(`Proxy läuft auf http://localhost:${PORT}`);
+    const isRender = process.env.RENDER === 'true';
+    const envMsg = isRender
+      ? `Backend läuft auf Render unter Port ${PORT}`
+      : `Backend läuft lokal unter http://localhost:${PORT}`;
+    console.log(envMsg);
 });

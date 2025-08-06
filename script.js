@@ -2,6 +2,8 @@ import { extractPlaceholders, restorePlaceholders } from "./utils.js";
 
 let json, translatables, textsToTranslate, keys;
 
+const customKey = document.getElementById("apiKey");
+
 document.getElementById("fileInput").addEventListener("change", async () => {
     const file = fileInput.files[0];
     if (!file) return;
@@ -40,12 +42,15 @@ document.getElementById("submit").addEventListener("click", async () => {
         return;
     }
 
+    const apiKeyInput = document.getElementById("apiKey");
+    const userApiKey = apiKeyInput.value.trim();
+
     const downloadArea = document.getElementById("downloads");
     downloadArea.replaceChildren();
 
     for (const lang of selectedLanguages) {
         try {
-            const translated = await deeplTranslate(textsToTranslate, lang);
+            const translated = await deeplTranslate(textsToTranslate, lang, userApiKey);
             await new Promise(resolve => setTimeout(resolve, 500));
             const final = {};
 
