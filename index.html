@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -174,28 +174,42 @@
       </div>
       <pre id="output"></pre>
 
-      <div id="upload">
+      <div class="flex">
+        <p class="marked">
+          Bei Eingabe eines eigenen DeepL API-Keys werden alle Wörter übersetzt.
+        </p>
+        <p class="marked">
+          Zu testzwecken wird meine API verwendet, dazu einfach das Feld leer
+          lassen,
+        </p>
+        <p class="marked">
+          dabei wird aber auf 10 Wörter begrenzt, um die API zu entlasten.
+        </p>
+      </div>
+      <div class="flex">
         <input
           type="text"
           name="apiKey"
           id="apiKey"
           placeholder="Eigener API-Key"
         />
+      </div>
+      <div id="errorBox"></div>
+      <div id="upload">
         <input type="file" id="fileInput" hidden />
         <label for="fileInput" class="button">Datei auswählen</label>
       </div>
+      <div id="fileInfo"></div>
       <button type="submit" id="submit">Übersetzen</button>
       <div class="button-flex"><div id="downloads"></div></div>
       <div><pre id="outputTranslated"></pre></div>
       <div class="localization-instructions">
         <ul>
           <li>
-            <h2>
-              ✅ Verwendung der übersetzten <code>.arb</code>-Dateien in Flutter
-            </h2>
+            <h2>✅ Verwendung der übersetzten .arb-Dateien in Flutter</h2>
           </li>
           <li>
-            <h3>1. 📁 Lege deine <code>.arb</code>-Dateien ab</h3>
+            <h3>1. 📁 Lege deine .arb-Dateien ab</h3>
             <p>
               Speichere deine <code>en.arb</code>, <code>de.arb</code> usw. im
               Ordner:
@@ -258,9 +272,9 @@
             <pre><code>Text(AppLocalizations.of(context)!.login)
 // oder mit Fallback:
 Text(AppLocalizations.of(context)?.login ?? 'Login')</code></pre>
+            <br /><br /><br />
 
-            <hr />
-            <p>
+            <p class="marked">
               <strong>📝 Hinweis:</strong> <code>.arb</code>-Schlüssel wie
               „login“, „logout“, „greeting“ müssen in <em>allen</em>
               <code>.arb</code>-Dateien vorhanden sein, sonst kommt es zu
@@ -270,6 +284,7 @@ Text(AppLocalizations.of(context)?.login ?? 'Login')</code></pre>
         </ul>
       </div>
     </div>
+    <footer><p>Marcus Becker</p></footer>
     <script type="module" src="script.js"></script>
   </body>
 </html>

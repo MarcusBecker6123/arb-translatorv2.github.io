@@ -4,22 +4,28 @@ let json, translatables, textsToTranslate, keys;
 
 const customKey = document.getElementById("apiKey");
 
+function showError(message) {
+    const box = document.getElementById("errorBox");
+    box.textContent = message;
+    setTimeout(() => box.textContent = "", 5000);
+}
+
 document.getElementById("fileInput").addEventListener("change", async () => {
     const file = fileInput.files[0];
     if (!file) return;
+    // Dateiname anzeigen
+    const fileInfo = document.getElementById("fileInfo");
+    fileInfo.textContent = `Geladene Datei: ${file.name}`;
 
     const text = await file.text();
 
     try {
         json = JSON.parse(text);
     } catch (err) {
-        console.error("Fehler beim Parsen:", err);
+        showError("Fehler beim Parsen:", err);
         return;
     }
 
-    const selectedLanguages = Array.from(
-        document.querySelectorAll('input[name="language"]:checked')
-    ).map(cb => cb.value);
 
     keys = Object.keys(json);
     translatables = keys
@@ -36,9 +42,12 @@ document.getElementById("submit").addEventListener("click", async () => {
     const selectedLanguages = Array.from(
         document.querySelectorAll('input[name="language"]:checked')
     ).map(cb => cb.value);
-
+    if (selectedLanguages.length === 0) {
+        showError("Wähle mindestens 1 Sprache.");
+        return;
+    }
     if (!json || !translatables || !textsToTranslate || !keys) {
-        console.error("Keine Datei geladen oder ungültige Daten.");
+        showError("Keine Datei geladen oder ungültige Daten.");
         return;
     }
 
@@ -93,7 +102,7 @@ document.getElementById("submit").addEventListener("click", async () => {
 
             downloadArea.appendChild(button);
         } catch (err) {
-            console.error(`Übersetzung für ${lang} fehlgeschlagen:`, err);
+            showError(`Übersetzung für ${lang} fehlgeschlagen:`, err);
         }
     }
 });
@@ -144,3 +153,4 @@ cb.addEventListener("change", () => {
     : "Sprachen auswählen";
 });
 });
+    // Sprachprüfung entfernt: Datei wird unabhängig von Sprachwahl eingelesen.

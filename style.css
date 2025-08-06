@@ -119,6 +119,7 @@ h2 {
 .flex {
     display:flex;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 .description {
@@ -216,15 +217,50 @@ button:hover, .button:hover {
   }
 
   .localization-instructions {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-  }
+  display: block;
+ 
+  padding: 10px;
+  margin-bottom: 20px;
+  line-height: 1.5;
+  word-spacing: 0.1em;
+  letter-spacing: 0.02em;
+  overflow-wrap: break-word;
+  word-break: normal;
+  white-space: normal;
+  font-size: 1rem;
+}
 
   #downloads {
   display: flex;
   flex-direction: column;         /* Bei vielen Buttons umbrechen */
   gap: 5px;               /* Abstand zwischen Buttons */
   align-items: center; /* Zentriert die Buttons innerhalb */
+}
+
+#apiKey {
+    text-align: center;
+    height: 40px;
+    width: 300px;
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 40px; 
+ 
+}
+
+#errorBox {
+    color: red;
+    padding: 20px;
+}
+footer {
+    padding: 30px;
+    text-align: center;
+}
+
+.marked {
+    background: #646464;
+}
+
+.marked strong, .marked em, .marked code{
+    color: #000;
+    background: yellow;
 }
