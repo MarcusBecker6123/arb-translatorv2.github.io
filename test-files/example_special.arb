@@ -1,0 +1,23 @@
+{
+  "@@locale": "en",
+  "greeting": "Hello, {name}!",
+  "itemCount": "You have {count} new messages.",
+  "boldText": "This is <b>bold</b> text.",
+  "italicText": "This is <i>italic</i> text.",
+  "mixedHtml": "Click <a href='#'>here</a> to continue.",
+  "lineBreak": "Line 1<br>Line 2",
+  "newline": "This is line one.\nThis is line two.",
+  "escapedQuote": "She said: \"Hello!\"",
+  "backslashExample": "C:\\\\Program Files\\\\MyApp",
+  "emoji": "I love pizza! 🍕",
+  "umlaut": "Fähigkeit, Größe, schön",
+  "specialChars": "@#$%^&*()_+{}|:<>?",
+  "combined": "User {name} has {count} new 🔔 alerts.",
+  "unicodeTest": "Unicode test: ✓ ✗ ♥ ★",
+  "htmlEntities": "5 &lt; 10 &amp;&amp; 10 &gt; 5",
+  "zeroCount": "You have {count} items in your cart.",
+  "nullPlaceholder": "No data for {value}.",
+  "htmlEscape": "Use &lt;br&gt; for a line break.",
+  "escapedJson": "{\"name\":\"value\"}",
+  "complex": "User <strong>{name}</strong> earned {count} ★ today!"
+}
