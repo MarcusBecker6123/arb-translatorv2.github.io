@@ -14,7 +14,7 @@ This tool allows developers to upload their `.arb` files, translate them into mu
 - **Backend** hosted on **Render**  
   Both use free-tier services and can be easily forked or adapted for personal use.
 
-The web app also contains a detailed **description section** that guides users through the entire process, including how to use their own DeepL API key.
+The web app also contains a **description section** that guides users through how to use their own DeepL API key.
 
 ---
 
