@@ -32,6 +32,32 @@ There is also an integrated **description section within the Web App** that expl
 
 I learned basic HTML, CSS, and JavaScript through CS50 Web, FreeCodeCamp, and personal practice. I built small web pages that process user input and manipulate data — and this project helped deepen my understanding by applying those concepts in a real-world scenario.
 
+### Tech Stack & Architecture
+
+The frontend is built entirely with vanilla JavaScript, HTML, and CSS, using no frameworks — this was a conscious decision to deeply understand the fundamentals and keep the application lightweight. It uses the FileReader API to parse uploaded `.arb` files directly in the browser, and JavaScript’s `fetch()` to communicate with the backend via REST.
+
+The backend, hosted on Render, is built with Node.js and acts as a proxy to the DeepL API. It receives translation requests and forwards them securely with the user’s API key (if provided). By separating the frontend (GitHub Pages) and backend (Render), I ensured that the app can be deployed for free and independently scaled if needed.
+
+In the browser, translated content is regenerated as `.arb` files using dynamic Blob generation and offered for download without requiring any server-side storage.
+
+### Challenges and What I Learned
+
+One of the biggest challenges was handling variable placeholders like `{name}` inside the strings. I had to temporarily replace them with safe tokens before sending them to DeepL, then re-insert them afterward — otherwise, DeepL would translate or corrupt them. Another tricky part was dealing with character encoding and special characters like `¡Hola!` or emojis, which sometimes caused incorrect translations or formatting errors.
+
+Additionally, working with asynchronous JavaScript functions (`async/await`) and managing user feedback (e.g., loading states or error messages) required careful planning. I also faced some CORS issues when deploying the backend to Render, which I solved by configuring proper headers.
+
+Another challenge I encountered was when translating into multiple languages at once. If too many requests were sent simultaneously to the DeepL API — especially without a personal API key — I started receiving rate-limit errors or incomplete responses. To solve this, I implemented a simple delay between each translation request using `setTimeout`, which spaces out the API calls and ensures more stable delivery. While this adds a slight delay to the overall process, it greatly improves reliability and prevents failed translations, particularly when users choose multiple target languages at once.
+
+All of these issues helped me gain a much deeper understanding of how web apps work, from client-side file handling to backend communication and third-party API usage.
+
+### Planned Enhancements
+
+In the future, I plan to expand the translator by integrating additional translation API providers beyond DeepL. While DeepL offers excellent quality, it comes with usage limits, especially on the free plan. By supporting alternative services such as Google Translate, Microsoft Translator, or even open-source models, I aim to provide users with more flexibility depending on their needs, budget, or preferred language support.
+
+This would also allow the tool to automatically fall back to a secondary API if the primary one fails or is rate-limited. The modular backend architecture already makes it possible to extend the translation logic without changing the frontend. Ideally, users will be able to select their preferred provider from a dropdown menu and enter the corresponding API key.
+
+Such features would make the ARB Translator more robust, scalable, and user-friendly for developers working on multilingual Flutter apps.
+
 ### Final Thoughts
 
 This is my **final project for Harvard’s CS50 course**. It shows how I learned by building, rather than waiting until I felt "ready." Solving real problems — even small ones — is what helped me grow the most. I hope this tool is helpful to others as well.
