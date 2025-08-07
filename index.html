@@ -3,12 +3,22 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <meta
+      name="description"
+      content="ARB-Translator liest aus .arb Dateien die key value pairs aus und übermittelt die values an DeepL, um sie zu übersetzen und wieder in einer neuen arb datei einzufügen"
+    />
+    <meta name="robots" content="index, follow" />
+    <title>ARB-Translator</title>
     <link rel="stylesheet" href="style.css" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌐</text></svg>"
+    />
   </head>
   <body>
-    <header></header>
-    <h1>ARB Translator</h1>
+    <header>
+      <h1>ARB Translator</h1>
+    </header>
     <hr />
     <div class="block">
       <!-- <label for="compact">
@@ -41,132 +51,158 @@
       </div>
       <div id="checkboxes">
         <div class="dropdown-container" id="languageDropdown">
-          <div class="dropdown-button" id="languageSelector">
+          <button
+            class="dropdown-button"
+            id="languageSelector"
+            aria-haspopup="true"
+            aria-expanded="false"
+            aria-controls="languageOptions"
+          >
             Sprachen auswählen
-          </div>
+          </button>
           <div class="checkbox-popover">
-            <label
-              ><input type="checkbox" name="language" value="BG" />
+            <label for="lang-bg"
+              ><input id="lang-bg" type="checkbox" name="language" value="BG" />
               Bulgarisch</label
             >
-            <label
-              ><input type="checkbox" name="language" value="CS" />
+            <label for="lang-cs"
+              ><input id="lang-cs" type="checkbox" name="language" value="CS" />
               Tschechisch</label
             >
-            <label
-              ><input type="checkbox" name="language" value="DA" />
+            <label for="lang-da"
+              ><input id="lang-da" type="checkbox" name="language" value="DA" />
               Dänisch</label
             >
-            <label
-              ><input type="checkbox" name="language" value="DE" />
+            <label for="lang-de"
+              ><input id="lang-de" type="checkbox" name="language" value="DE" />
               Deutsch</label
             >
-            <label
-              ><input type="checkbox" name="language" value="EL" />
+            <label for="lang-el"
+              ><input id="lang-el" type="checkbox" name="language" value="EL" />
               Griechisch</label
             >
-            <label
-              ><input type="checkbox" name="language" value="EN-GB" /> Englisch
-              (UK)</label
+            <label for="lang-en-gb"
+              ><input
+                id="lang-en-gb"
+                type="checkbox"
+                name="language"
+                value="EN-GB"
+              />
+              Englisch (UK)</label
             >
-            <label
-              ><input type="checkbox" name="language" value="EN-US" /> Englisch
-              (US)</label
+            <label for="lang-en-us"
+              ><input
+                id="lang-en-us"
+                type="checkbox"
+                name="language"
+                value="EN-US"
+              />
+              Englisch (US)</label
             >
-            <label
-              ><input type="checkbox" name="language" value="ES" />
+            <label for="lang-es"
+              ><input id="lang-es" type="checkbox" name="language" value="ES" />
               Spanisch</label
             >
-            <label
-              ><input type="checkbox" name="language" value="ET" />
+            <label for="lang-et"
+              ><input id="lang-et" type="checkbox" name="language" value="ET" />
               Estnisch</label
             >
-            <label
-              ><input type="checkbox" name="language" value="FI" />
+            <label for="lang-fi"
+              ><input id="lang-fi" type="checkbox" name="language" value="FI" />
               Finnisch</label
             >
-            <label
-              ><input type="checkbox" name="language" value="FR" />
+            <label for="lang-fr"
+              ><input id="lang-fr" type="checkbox" name="language" value="FR" />
               Französisch</label
             >
-            <label
-              ><input type="checkbox" name="language" value="HU" />
+            <label for="lang-hu"
+              ><input id="lang-hu" type="checkbox" name="language" value="HU" />
               Ungarisch</label
             >
-            <label
-              ><input type="checkbox" name="language" value="ID" />
+            <label for="lang-id"
+              ><input id="lang-id" type="checkbox" name="language" value="ID" />
               Indonesisch</label
             >
-            <label
-              ><input type="checkbox" name="language" value="IT" />
+            <label for="lang-it"
+              ><input id="lang-it" type="checkbox" name="language" value="IT" />
               Italienisch</label
             >
-            <label
-              ><input type="checkbox" name="language" value="JA" />
+            <label for="lang-ja"
+              ><input id="lang-ja" type="checkbox" name="language" value="JA" />
               Japanisch</label
             >
-            <label
-              ><input type="checkbox" name="language" value="KO" />
+            <label for="lang-ko"
+              ><input id="lang-ko" type="checkbox" name="language" value="KO" />
               Koreanisch</label
             >
-            <label
-              ><input type="checkbox" name="language" value="LT" />
+            <label for="lang-lt"
+              ><input id="lang-lt" type="checkbox" name="language" value="LT" />
               Litauisch</label
             >
-            <label
-              ><input type="checkbox" name="language" value="LV" />
+            <label for="lang-lv"
+              ><input id="lang-lv" type="checkbox" name="language" value="LV" />
               Lettisch</label
             >
-            <label
-              ><input type="checkbox" name="language" value="NB" />
+            <label for="lang-nb"
+              ><input id="lang-nb" type="checkbox" name="language" value="NB" />
               Norwegisch</label
             >
-            <label
-              ><input type="checkbox" name="language" value="NL" />
+            <label for="lang-nl"
+              ><input id="lang-nl" type="checkbox" name="language" value="NL" />
               Niederländisch</label
             >
-            <label
-              ><input type="checkbox" name="language" value="PL" />
+            <label for="lang-pl"
+              ><input id="lang-pl" type="checkbox" name="language" value="PL" />
               Polnisch</label
             >
-            <label
-              ><input type="checkbox" name="language" value="PT-BR" />
+            <label for="lang-pt-br"
+              ><input
+                id="lang-pt-br"
+                type="checkbox"
+                name="language"
+                value="PT-BR"
+              />
               Portugiesisch (BR)</label
             >
-            <label
-              ><input type="checkbox" name="language" value="PT-PT" />
+            <label for="lang-pt-pt"
+              ><input
+                id="lang-pt-pt"
+                type="checkbox"
+                name="language"
+                value="PT-PT"
+              />
               Portugiesisch (PT)</label
             >
-            <label
-              ><input type="checkbox" name="language" value="RO" />
+            <label for="lang-ro"
+              ><input id="lang-ro" type="checkbox" name="language" value="RO" />
               Rumänisch</label
             >
-            <label
-              ><input type="checkbox" name="language" value="RU" />
+            <label for="lang-ru"
+              ><input id="lang-ru" type="checkbox" name="language" value="RU" />
               Russisch</label
             >
-            <label
-              ><input type="checkbox" name="language" value="SK" />
+            <label for="lang-sk"
+              ><input id="lang-sk" type="checkbox" name="language" value="SK" />
               Slowakisch</label
             >
-            <label
-              ><input type="checkbox" name="language" value="SL" />
+            <label for="lang-sl"
+              ><input id="lang-sl" type="checkbox" name="language" value="SL" />
               Slowenisch</label
             >
-            <label
-              ><input type="checkbox" name="language" value="SV" />
+            <label for="lang-sv"
+              ><input id="lang-sv" type="checkbox" name="language" value="SV" />
               Schwedisch</label
             >
-            <label
-              ><input type="checkbox" name="language" value="TR" />
+            <label for="lang-tr"
+              ><input id="lang-tr" type="checkbox" name="language" value="TR" />
               Türkisch</label
             >
-            <label
-              ><input type="checkbox" name="language" value="UK" />
+            <label for="lang-uk"
+              ><input id="lang-uk" type="checkbox" name="language" value="UK" />
               Ukrainisch</label
             >
-            <label
-              ><input type="checkbox" name="language" value="ZH" />
+            <label for="lang-zh"
+              ><input id="lang-zh" type="checkbox" name="language" value="ZH" />
               Chinesisch</label
             >
           </div>
@@ -186,14 +222,21 @@
           dabei wird aber auf 10 Wörter begrenzt, um die API zu entlasten.
         </p>
         <p class="marked">
-  🔑 <strong>So bekommst du deinen eigenen DeepL API-Key:</strong><br />
-  Gehe auf <a href="https://www.deepl.com/pro-api" target="_blank">https://www.deepl.com/pro-api</a> und wähle den kostenlosen API-Zugang (DeepL API Free).<br />
-  Nach der Registrierung findest du deinen persönlichen Schlüssel im DeepL-Web-Dashboard.<br />
-  Kopiere diesen Key und füge ihn hier im Eingabefeld ein, um beliebig viele Texte übersetzen zu lassen.
-</p>
+          🔑 <strong>So bekommst du deinen eigenen DeepL API-Key:</strong><br />
+          Gehe auf
+          <a href="https://www.deepl.com/pro-api" target="_blank"
+            >https://www.deepl.com/pro-api</a
+          >
+          und wähle den kostenlosen API-Zugang (DeepL API Free).<br />
+          Nach der Registrierung findest du deinen persönlichen Schlüssel im
+          DeepL-Web-Dashboard.<br />
+          Kopiere diesen Key und füge ihn hier im Eingabefeld ein, um beliebig
+          viele Texte übersetzen zu lassen.
+        </p>
       </div>
       <div class="flex">
-        <input
+        <label for="apiKey" class="visually-hidden">Eigener API Key</label
+        ><input
           type="text"
           name="apiKey"
           id="apiKey"
@@ -202,11 +245,26 @@
       </div>
       <div id="errorBox"></div>
       <div id="upload">
-        <input type="file" id="fileInput" hidden />
-        <label for="fileInput" class="button">Datei auswählen</label>
+        <label
+          tabindex="0"
+          for="fileInput"
+          class="button"
+          id="fileUploadLabel"
+          role="button"
+          aria-label="Datei zum Hochladen auswählen"
+          >Datei auswählen</label
+        >
+        <input
+          tabindex="-1"
+          type="file"
+          id="fileInput"
+          style="position: absolute; left: -9999px"
+        />
       </div>
       <div id="fileInfo"></div>
-      <button type="submit" id="submit">Übersetzen</button>
+      <button type="submit" id="submit" aria-label="Übersetzen">
+        Übersetzen
+      </button>
       <div class="button-flex"><div id="downloads"></div></div>
       <div><pre id="outputTranslated"></pre></div>
       <!--<div class="localization-instructions">

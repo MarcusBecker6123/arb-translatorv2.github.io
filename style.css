@@ -128,7 +128,7 @@ h2 {
     letter-spacing: -0.5px;
 }
 
-button {
+button:not(:nth-child(1)) {
     min-width: 150px;
     min-height: 30px;
     display:block;
@@ -141,8 +141,8 @@ button {
     border-radius:7px;
 }
 
-button:hover, .button:hover {
-    scale:1.05;
+button:hover:not(:nth-child(1)), .button:hover {
+    scale:1.08;
 }
 
 .dropdown-container {
@@ -154,14 +154,14 @@ button:hover, .button:hover {
     display: flex;
     justify-content: start;
     align-items: center;
-    padding: 10px;
-    margin: 20px 0;
+    
+    
     border: 1px solid #ccc;
     background: white;
     cursor: pointer;
     border-radius: 4px;
-    width: 300px;
-    height: 30px;
+    width: 322px;
+    height: 40px;
     text-align: left;
     color: #000000ff
   }
@@ -263,4 +263,29 @@ footer {
 .marked strong, .marked em, .marked code{
     color: #000;
     background: yellow;
+}
+
+::placeholder {
+    color: #f5f5f5;
+}
+
+.visually-hidden {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* Tastatur-Fokus sichtbar machen */
+:focus-visible {
+  outline: 3px solid #1976d2;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+
+#fileUploadLabel:focus {
+  outline: 3px solid #1976d2;
 }

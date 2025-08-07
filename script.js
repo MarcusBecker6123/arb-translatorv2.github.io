@@ -153,4 +153,11 @@ cb.addEventListener("change", () => {
     : "Sprachen auswählen";
 });
 });
-    // Sprachprüfung entfernt: Datei wird unabhängig von Sprachwahl eingelesen.
+
+// Barrierefreiheit: Datei auswählen-Label reagiert auf Enter und Space
+document.getElementById('fileUploadLabel').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        document.getElementById('fileInput').click();
+    }
+});
